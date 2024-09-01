@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.default_language }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="/assets/styles.css">
+</head>
+<body>
+    <header>
+        <h1>{{ site.title }}</h1>
+    </header>
+    <main>
+        <h2>{{ page.title }}</h2>
+        <div class="font-details">
+            <h3>Font Family: {{ page.family }}</h3>
+            <p>Weight: {{ page.weight }}</p>
+            <p>Style: {{ page.style }}</p>
+            <p>Format: {{ page.format }}</p>
+            <p>Description: {{ content }}</p>
+            <p>Available from: {{ page.available_from | date: site.languages[page.lang].date_format }}</p>
+            {% if page.available_until %}
+                <p>Available until: {{ page.available_until | date: site.languages[page.lang].date_format }}</p>
+            {% else %}
+                <p>This font is available for download.</p>
+            {% endif %}
+            <a href="/_fonts/{{ page.family | downcase }}.{{ page.format }}" download>{{ site.languages[page.lang].download }}</a>
+        </div>
+        
+        <h4>{{ site.languages[page.lang].preview_text }}</h4>
+        <input type="text" id="preview-input" placeholder="Type your text here..." />
+        <div id="preview-area" style="font-family: '{{ page.family }}'; font-size: 16px;">
+            <p id="preview-text">Your text will appear here...</p>
+        </div>
+    </main>
+    <footer>
+        <p>{{ site.description }}</p>
+    </footer>
+
+    <script>
+        const previewInput = document.getElementById('preview-input');
+        const previewText = document.getElementById('preview-text');
+
+        // อัปเดตข้อความตัวอย่างเมื่อผู้ใช้พิมพ์
+        previewInput.addEventListener('input', function() {
+            previewText.textContent = previewInput.value || "Your text will appear here...";
+        });
+    </script>
+</body>
+</html>
