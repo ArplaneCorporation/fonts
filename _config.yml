@@ -1,0 +1,20 @@
+title: "Arplane Font"
+description: "A collection of beautiful fonts for designers and developers."
+screenshot: "screenshot.png"
+default_language: "en"
+
+languages:
+  en:
+    hello: "Hello"
+    search_placeholder: "Search for a font..."
+    choose_font: "Choose Your Font"
+    preview_text: "Type to preview:"
+    download: "Download Font"
+    date_format: "%A, %B %e, %Y"  # English date format
+  th:
+    hello: "สวัสดี"
+    search_placeholder: "ค้นหาฟอนต์..."
+    choose_font: "เลือกฟอนต์ของคุณ"
+    preview_text: "พิมพ์เพื่อดูตัวอย่าง:"
+    download: "ดาวน์โหลดฟอนต์"
+    date_format: "วัน%u ที่ %e %B %Y"  # Thai date format
