@@ -1,62 +1,23 @@
-<!DOCTYPE html>
-<html lang="{{ site.lang | default: site.default_language }}">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ site.title }}</title>
-    <link rel="stylesheet" href="assets/styles.css">
-</head>
-<body>
-    <header>
-        <div class="header-container">
-            <h1>{{ site.title }}</h1>
-            <nav>
-                <ul>
-                    <li><a href="/">{{ site.languages[site.lang].home }}</a></li>
-                    <li><a href="/all-fonts">{{ site.languages[site.lang].all_fonts }}</a></li>
-                    <li>
-                        <label for="language-switcher">{{ site.languages[site.lang].language }}</label>
-                        <select id="language-switcher">
-                            {% for lang in site.languages %}
-                                <option value="{{ lang }}" {% if lang == site.lang %}selected{% endif %}>{{ site.languages[lang].name }}</option>
-                            {% endfor %}
-                        </select>
-                    </li>
-                </ul>
-            </nav>
+---
+layout: default
+title: {{ site.languages[site.lang].home }}
+lang: en
+---
+
+<section class="intro">
+    <h2>{{ site.languages[site.lang].welcome_message }}</h2>
+    <p>{{ site.description }}</p>
+</section>
+
+<section class="font-grid">
+    <h2>{{ site.languages[site.lang].recent_fonts }}</h2>
+    <div class="grid">
+        {% for font in site.posts limit:6 %}
+        <div class="font-card">
+            <h3>{{ font.title }}</h3>
+            <p>{{ font.excerpt }}</p>
+            <a href="{{ font.url }}" class="btn">{{ site.languages[site.lang].view_font }}</a>
         </div>
-    </header>
-
-    <main>
-        <section class="intro">
-            <h2>{{ site.languages[site.lang].welcome_message }}</h2>
-            <p>{{ site.description }}</p>
-        </section>
-
-        <section class="font-grid">
-            <h2>{{ site.languages[site.lang].recent_fonts }}</h2>
-            <div class="grid">
-                {% for font in site.posts limit:6 %}
-                <div class="font-card">
-                    <h3>{{ font.title }}</h3>
-                    <p>{{ font.excerpt }}</p>
-                    <a href="{{ font.url }}" class="btn">{{ site.languages[site.lang].view_font }}</a>
-                </div>
-                {% endfor %}
-            </div>
-        </section>
-    </main>
-
-    <footer>
-        <p>{{ site.languages[site.lang].footer_message }}</p>
-    </footer>
-
-    <script>
-        // ระบบเปลี่ยนภาษา
-        const languageSwitcher = document.getElementById('language-switcher');
-        languageSwitcher.addEventListener('change', function() {
-            window.location.href = '' + this.value;
-        });
-    </script>
-</body>
-</html>
+        {% endfor %}
+    </div>
+</section>
