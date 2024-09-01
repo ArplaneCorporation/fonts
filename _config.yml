@@ -11,6 +11,12 @@ languages:
     preview_text: "Type to preview:"
     download: "Download Font"
     date_format: "%A, %B %e, %Y"  # English date format
+    home: "Home"
+    welcome_message: "Welcome to our font collection!"
+    recent_fonts: "Recent Fonts"
+    view_font: "View Font"
+    download: "Download"
+    not_available: "Not Available"
   th:
     hello: "สวัสดี"
     search_placeholder: "ค้นหาฟอนต์..."
@@ -18,3 +24,12 @@ languages:
     preview_text: "พิมพ์เพื่อดูตัวอย่าง:"
     download: "ดาวน์โหลดฟอนต์"
     date_format: "วัน%u ที่ %e %B %Y"  # Thai date format
+
+    home: "หน้าแรก"
+    welcome_message: "ยินดีต้อนรับสู่คอลเลกชันฟอนต์ของเรา!"
+    recent_fonts: "ฟอนต์ล่าสุด"
+    view_font: "ดูฟอนต์"
+    download: "ดาวน์โหลด"
+    not_available: "ยังไม่พร้อมให้ดาวน์โหลด"
+default_language: "en"
+
