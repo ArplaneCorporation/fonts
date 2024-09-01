@@ -1,0 +1,79 @@
+---
+layout: default
+title: "Font Gallery"
+---
+
+<h2>{{ site.languages[page.lang].choose_font }}</h2>
+<select id="language-selector">
+    <option value="en">English</option>
+    <option value="th">ไทย</option>
+</select>
+<input type="text" id="search" placeholder="{{ site.languages[page.lang].search_placeholder }}" />
+
+<div>
+    <label for="font-input">{{ site.languages[page.lang].preview_text }}</label>
+    <input type="text" id="font-input" placeholder="Type your text here..." />
+    <label for="font-size">Font Size:</label>
+    <input type="number" id="font-size" value="16" min="8" max="100" />
+</div>
+
+<div id="font-list">
+    {% for post in site.posts %}
+        {% if post.lang == page.lang %}
+            <div class="font-item" style="font-family: '{{ post.family }}';">
+                <h4>{{ post.title }}</h4>
+                <p>{{ post.content }}</p>
+                
+                {% assign current_date = site.time | date: "%Y-%m-%d" %}
+                {% if current_date >= post.available_from and (post.available_until == "" or current_date <= post.available_until) %}
+                    <a href="/_fonts/{{ post.family | downcase }}.{{ post.format }}" download>{{ site.languages[page.lang].download }}</a>
+                {% else %}
+                    <p style="color: red;">
+                        Font available from {{ post.available_from | date: site.languages[page.lang].date_format }}{% if post.available_until != "" %} to {{ post.available_until | date: site.languages[page.lang].date_format }}{% endif %}
+                    </p>
+                {% endif %}
+                <p>Preview: <span id="preview-text-{{ forloop.index }}">{{ font_input.value }}</span></p>
+            </div>
+        {% endif %}
+    {% endfor %}
+</div>
+
+<script>
+    const searchInput = document.getElementById('search');
+    const fontInput = document.getElementById('font-input');
+    const fontSizeInput = document.getElementById('font-size');
+    const fontItems = document.querySelectorAll('.font-item');
+
+    // ฟังก์ชันค้นหาฟอนต์
+    searchInput.addEventListener('input', function() {
+        const searchTerm = searchInput.value.toLowerCase();
+        fontItems.forEach(item => {
+            const fontName = item.querySelector('h4').textContent.toLowerCase();
+            item.style.display = fontName.includes(searchTerm) ? 'block' : 'none';
+        });
+    });
+
+    // แสดงตัวอย่างฟอนต์
+    fontInput.addEventListener('input', function() {
+        const inputText = fontInput.value;
+        fontItems.forEach((item, index) => {
+            const previewElement = document.getElementById(`preview-text-${index + 1}`);
+            if (previewElement) {
+                previewElement.textContent = inputText;
+                item.style.fontSize = fontSizeInput.value + 'px'; // ปรับขนาดฟอนต์
+            }
+        });
+    });
+
+    fontSizeInput.addEventListener('input', function() {
+        fontItems.forEach(item => {
+            item.style.fontSize = fontSizeInput.value + 'px'; // ปรับขนาดฟอนต์
+        });
+    });
+
+    // เปลี่ยนภาษา
+    document.getElementById('language-selector').addEventListener('change', function() {
+        const selectedLang = this.value;
+        window.location.href = `/${selectedLang}/`; // เปลี่ยน URL ตามภาษาที่เลือก
+    });
+</script>
