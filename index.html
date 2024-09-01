@@ -5,8 +5,10 @@ lang: en
 ---
 
 <section class="intro">
-    <h2>{{ site.languages[site.lang].welcome_message }}</h2>
-    <p>{{ site.description }}</p>
+    <div class="intro-content">
+        <h2>{{ site.languages[site.lang].welcome_message }}</h2>
+        <p>{{ site.description }}</p>
+    </div>
 </section>
 
 <section class="font-grid">
@@ -16,7 +18,14 @@ lang: en
         <div class="font-card">
             <h3>{{ font.title }}</h3>
             <p>{{ font.excerpt }}</p>
-            <a href="{{ font.url }}" class="btn">{{ site.languages[site.lang].view_font }}</a>
+            <div class="btn-container">
+                <a href="{{ font.url }}" class="btn">{{ site.languages[site.lang].view_font }}</a>
+                {% if font.available_until and font.available_until <= site.time %}
+                    <a href="{{ font.download_url }}" class="btn download-btn">{{ site.languages[site.lang].download }}</a>
+                {% else %}
+                    <button class="btn disabled-btn" disabled>{{ site.languages[site.lang].not_available }}</button>
+                {% endif %}
+            </div>
         </div>
         {% endfor %}
     </div>
