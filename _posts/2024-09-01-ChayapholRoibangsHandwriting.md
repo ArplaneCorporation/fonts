@@ -5,7 +5,7 @@ family: "Chayaphol Roibang's Handwriting"
 weight: "400"
 style: "normal"
 format: "otf"
-available_from: "2024-09-01"
+available_from: "2024-09-02"
 available_until: ""  # ไม่มีเพื่อให้ดาวน์โหลดได้ทันที
 lang: "en"  # หรือ "th" ขึ้นอยู่กับภาษาที่คุณต้องการ
 ---
